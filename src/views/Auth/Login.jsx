@@ -10,15 +10,28 @@ export default function Login() {
   const auth = useAuth();
   const { formState, handleFormChange } = useForm({ email: '', password: '' });
   const [error, setError] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
 
   // The `from` property of `location.state` gives us
   // the URL to redirect to after logging in.
   const { from } = location.state || { from: { pathname: '/' } };
 
   const handleLogin = (event) => {
-    event.preventDefault();
-    const loginWasSuccessful = auth.login(formState.email, formState.password);
+    try {
+      event.preventDefault();
 
+      const loginWasSuccessful = auth.login(formState.email, formState.password); 
+
+      console.log(auth.login())
+
+      loginWasSuccessful
+        ? history.replace(from)
+        : setError('poopy-face heinous pants');
+    } catch (error) {
+      console.log(error);
+    }
     // TODO: If login was unsuccessful, set an error with a message
     // to display to the user that their login failed.
     //
@@ -32,17 +45,21 @@ export default function Login() {
     <>
       <h3>You must log in to view the page at {from.pathname}</h3>
       <form onSubmit={handleLogin} className={styles.loginForm}>
-        <label>Email</label>
+        <label htmlFor="email">Email</label>
         <input
           id="email"
           name="email"
           type="email"
-        />{' '}
-        <label>Password</label>
+          value={formState.email}
+          onChange={handleFormChange}
+        />
+        <label htmlFor="password">Password</label>
         <input
           id="password"
           name="password"
           type="password"
+          value={formState.password}
+          onChange={handleFormChange}
         />
         <button type="submit" aria-label="Sign In">
           Sign in
