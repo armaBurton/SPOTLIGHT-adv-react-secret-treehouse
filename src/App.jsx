@@ -6,6 +6,7 @@ import Home from './views/Home/Home';
 import Treehouse from './views/Treehouse/Treehouse';
 import styles from './App.css';
 import TreehouseMembers from './views/Treehouse/TreehouseMembers';
+import 'App.css';
 
 export default function App() {
   return (
