@@ -2,6 +2,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import secret from '../../assets/top-secret.png';
 import styles from './Treehouse.css';
+import { PrivateRoute } from '../../components/PrivateRoute/PrivateRoute';
 
 export default function Treehouse() {
   const history = useHistory();
